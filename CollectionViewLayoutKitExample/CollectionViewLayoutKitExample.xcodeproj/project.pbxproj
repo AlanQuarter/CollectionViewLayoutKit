@@ -11,6 +11,7 @@
 		E766ECC622B21ED5005FBCB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E766ECC522B21ED5005FBCB6 /* ViewController.swift */; };
 		E766ECCB22B21ED6005FBCB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E766ECCA22B21ED6005FBCB6 /* Assets.xcassets */; };
 		E766ECCE22B21ED6005FBCB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E766ECCC22B21ED6005FBCB6 /* LaunchScreen.storyboard */; };
+		E7BB014D22B7827F00F7F4AB /* CollectionViewLayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB014C22B7827F00F7F4AB /* CollectionViewLayoutKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		E766ECCA22B21ED6005FBCB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E766ECCD22B21ED6005FBCB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E766ECCF22B21ED6005FBCB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7BB014C22B7827F00F7F4AB /* CollectionViewLayoutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CollectionViewLayoutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7BB014D22B7827F00F7F4AB /* CollectionViewLayoutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 			children = (
 				E766ECC222B21ED5005FBCB6 /* Sources */,
 				E766ECC122B21ED5005FBCB6 /* Products */,
+				E7BB014B22B7827F00F7F4AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +63,14 @@
 				E766ECCF22B21ED6005FBCB6 /* Info.plist */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		E7BB014B22B7827F00F7F4AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB014C22B7827F00F7F4AB /* CollectionViewLayoutKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DB99163BD76E321DA0A882D /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99209546FBDF143BF588A /* WaterfallLayout.swift */; };
+		2DB999DDA4A41E1FE139B8C9 /* CollectionViewLayoutKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB998C24CE14AC64608701B /* CollectionViewLayoutKitError.swift */; };
 		E7BB014422B233D500F7F4AB /* Sources.h in Headers */ = {isa = PBXBuildFile; fileRef = E7BB014222B233D500F7F4AB /* Sources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DB99209546FBDF143BF588A /* WaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
+		2DB998C24CE14AC64608701B /* CollectionViewLayoutKitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutKitError.swift; sourceTree = "<group>"; };
 		E7BB013F22B233D500F7F4AB /* CollectionViewLayoutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CollectionViewLayoutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BB014222B233D500F7F4AB /* Sources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sources.h; sourceTree = "<group>"; };
 		E7BB014322B233D500F7F4AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +52,8 @@
 			children = (
 				E7BB014222B233D500F7F4AB /* Sources.h */,
 				E7BB014322B233D500F7F4AB /* Info.plist */,
+				2DB99209546FBDF143BF588A /* WaterfallLayout.swift */,
+				2DB998C24CE14AC64608701B /* CollectionViewLayoutKitError.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -130,6 +136,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DB99163BD76E321DA0A882D /* WaterfallLayout.swift in Sources */,
+				2DB999DDA4A41E1FE139B8C9 /* CollectionViewLayoutKitError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
