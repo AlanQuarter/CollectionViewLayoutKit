@@ -20,14 +20,29 @@ class ViewController: UIViewController {
         self.view.backgroundColor = .white
 
         self.collectionView = {
-            let layout = WaterfallLayout()
-            layout.delegate = self
+            var frame = UIScreen.main.bounds
+            frame.origin.y = 64
+            frame.size.height -= frame.origin.y
 
-            let view = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: layout)
-            view.backgroundColor = self.view.backgroundColor
+            let layout = WaterfallLayout(
+                    itemWidth: { _ in .numberOfColumns(Int.random(in: 2 ... 3)) },
+                    itemHeight: { _ in 100 + CGFloat(Int.random(in: 0 ... 100)) })
+                    .setItemSpacing(width: 10, height: 10).setSectionInsets { _, _, section in section == 0 ? .zero : UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0) }
+                    .setNumberOfSectionHeader(Int.random(in: 1 ... 3))
+                    .setSectionHeaderHeight { _ in CGFloat(Int.random(in: 1 ... 2)) * 40 }
+                    .setNumberOfSectionFooter(Int.random(in: 1 ... 3))
+                    .setSectionHeaderInsets(top: 0, left: 0, bottom: 10, right: 0)
+                    .setSectionFooterHeight { _ in CGFloat(Int.random(in: 1 ... 2)) * 40 }
+                    .setSectionFooterInsets(top: 10, left: 0, bottom: 0, right: 0)
+
+            let view = UICollectionView(frame: frame, collectionViewLayout: layout)
+            view.backgroundColor = .yellow
             view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+            view.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+            view.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
             view.dataSource = self
+            view.delegate = self
 
             self.view.addSubview(view)
 
@@ -84,35 +99,40 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
 
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let supplementaryView: UICollectionReusableView
+
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
+            sectionHeader.backgroundColor = .red
+            supplementaryView = sectionHeader
+
+        case UICollectionView.elementKindSectionFooter:
+            let sectionFooter = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath)
+            sectionFooter.backgroundColor = .blue
+            supplementaryView = sectionFooter
+
+        default:
+            supplementaryView = UICollectionReusableView()
+        }
+
+        return supplementaryView
+    }
+
 }
 
 
-extension ViewController: WaterfallLayoutDelegate {
+extension ViewController: UICollectionViewDelegate {
 
-    func collectionView(
-            _ collectionView: UICollectionView,
-            layout waterfallLayout: WaterfallLayout,
-            horizontalConfigurationForSectionAt section: Int
-    ) -> WaterfallLayout.HorizontalConfiguration {
-        return WaterfallLayout.HorizontalConfiguration(numberOfWaterfalls: 2)
-    }
-
-
-    func collectionView(
-            _ collectionView: UICollectionView,
-            layout waterfallLayout: WaterfallLayout,
-            heightForItemAt indexPath: IndexPath
-    ) -> CGFloat {
-        return 100 + CGFloat(Int.random(in: 0 ... 100))
-    }
-
-
-    func collectionView(
-            _ collectionView: UICollectionView,
-            layout waterfallLayout: WaterfallLayout,
-            itemSpacingSizeForSectionAt section: Int
-    ) -> CGSize {
-        return CGSize(width: 10, height: 10)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
 }
