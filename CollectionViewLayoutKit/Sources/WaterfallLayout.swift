@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 
-open class WaterfallLayout: UICollectionViewLayout {
+open class WaterfallLayout: DecorationViewSupportableLayout {
 
     fileprivate var cellAttributes: [[UICollectionViewLayoutAttributes]] = []
     fileprivate var sectionHeaderAttributes: [[UICollectionViewLayoutAttributes]] = []
@@ -344,6 +344,8 @@ extension WaterfallLayout {
             return
         }
 
+        self.contentHeight = self.topSpaceForDecorationView
+
         for section in 0 ..< collectionView.numberOfSections {
             let sectionInsets = self.builderBundle.sectionInsetsBuilder((collectionView, layout: self, section))
 
@@ -351,6 +353,8 @@ extension WaterfallLayout {
             self.prepareCells(of: collectionView, with: sectionInsets, forSectionAt: section)
             self.prepareSectionFooters(of: collectionView, with: sectionInsets, forSectionAt: section)
         }
+
+        self.contentHeight += self.bottomSpaceForDecorationView
     }
 
 
@@ -486,10 +490,11 @@ extension WaterfallLayout {
 
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        var attributesInRect = super.layoutAttributesForElements(in: rect) ?? []
+        
         let allAttributes = Array(self.cellAttributes.joined())
                 + Array(self.sectionHeaderAttributes.joined())
                 + Array(self.sectionFooterAttributes.joined())
-        var attributesInRect: [UICollectionViewLayoutAttributes] = []
 
         for attributes in allAttributes {
             guard attributes.frame.intersects(rect) else {

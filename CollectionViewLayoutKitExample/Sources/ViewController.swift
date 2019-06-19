@@ -10,7 +10,6 @@ import CollectionViewLayoutKit
 
 class ViewController: UIViewController {
 
-
     private weak var collectionView: UICollectionView!
 
 
