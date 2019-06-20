@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E7BB014422B233D500F7F4AB /* Sources.h in Headers */ = {isa = PBXBuildFile; fileRef = E7BB014222B233D500F7F4AB /* Sources.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DB99163BD76E321DA0A882D /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99209546FBDF143BF588A /* WaterfallLayout.swift */; };
+		2DB9987B8C90DBC2D3CD6711 /* DecorationViewSupportableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99F4203B433AEB9E4C2F2 /* DecorationViewSupportableLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DB99209546FBDF143BF588A /* WaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
+		2DB99F4203B433AEB9E4C2F2 /* DecorationViewSupportableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecorationViewSupportableLayout.swift; sourceTree = "<group>"; };
 		E7BB013F22B233D500F7F4AB /* CollectionViewLayoutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CollectionViewLayoutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7BB014222B233D500F7F4AB /* Sources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sources.h; sourceTree = "<group>"; };
 		E7BB014322B233D500F7F4AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,8 +48,9 @@
 		E7BB014122B233D500F7F4AB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E7BB014222B233D500F7F4AB /* Sources.h */,
 				E7BB014322B233D500F7F4AB /* Info.plist */,
+				2DB99209546FBDF143BF588A /* WaterfallLayout.swift */,
+				2DB99F4203B433AEB9E4C2F2 /* DecorationViewSupportableLayout.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -59,7 +62,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7BB014422B233D500F7F4AB /* Sources.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +97,7 @@
 				TargetAttributes = {
 					E7BB013E22B233D500F7F4AB = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -104,6 +107,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E7BB013522B233D500F7F4AB;
 			productRefGroup = E7BB014022B233D500F7F4AB /* Products */;
@@ -130,6 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DB99163BD76E321DA0A882D /* WaterfallLayout.swift in Sources */,
+				2DB9987B8C90DBC2D3CD6711 /* DecorationViewSupportableLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +275,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -277,7 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.froglab.Sources;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -293,6 +300,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.froglab.Sources;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
