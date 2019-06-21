@@ -24,8 +24,11 @@ class WaterfallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let number: Int8 = 0
+        let result = CGFloat(number)
+
         self.collectionView = {
-            let layout = WaterfallLayout(itemWidth: .numberOfColumns(2), itemHeight: { _ in CGFloat(Int.random(in: 100 ... 200)) })
+            let layout = WaterfallLayout(height: { _, _, _ in CGFloat(Int.random(in: 100 ... 200)) }, numberOfColumns: 2)
                     .setItemSpacing(width: 10, height: 10)
                     .setSectionInsets { _, _, section in section == 0 ? .zero : UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0) }
                     .setNumberOfSectionHeader { _, _, section in section + 1 }

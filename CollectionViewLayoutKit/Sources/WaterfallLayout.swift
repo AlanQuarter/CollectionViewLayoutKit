@@ -32,111 +32,142 @@ open class WaterfallLayout: DecorationViewSupportableLayout {
     }
 
 
-    public init(itemWidth: @escaping (WaterfallLayoutSectionBasedParameter) -> ItemWidth, itemHeight: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
-        self.builderBundle = BuilderBundle(itemWidthBuilder: itemWidth, itemHeightBuilder: itemHeight)
-        super.init()
-    }
-
-
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 
-    public convenience init(itemWidth: ItemWidth, itemHeight: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
-        self.init(itemWidth: { _ in itemWidth }, itemHeight: itemHeight)
+    public init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .sizeWithAlignment(widthBuilder: widthBuilder, heightBuilder: heightBuilder, alignmentBuilder: alignmentBuilder))
+        super.init()
     }
 
 
-    public convenience init(itemWidth: CGFloat, itemHeight: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) {
-        self.init(itemWidth: .fixedWidth(itemWidth, alignment: alignment), itemHeight: itemHeight)
+    public convenience init(width: CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: { _ in width }, height: heightBuilder, alignment: alignmentBuilder)
     }
 
 
-    public convenience init(numberOfColumns: Int, itemHeight: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
-        self.init(itemWidth: .numberOfColumns(numberOfColumns), itemHeight: itemHeight)
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: widthBuilder, height: { _ in height }, alignment: alignmentBuilder)
     }
 
 
-    public convenience init(itemWidth: @escaping (WaterfallLayoutSectionBasedParameter) -> ItemWidth, itemHeight: CGFloat) {
-        self.init(itemWidth: itemWidth, itemHeight: { _ in itemHeight })
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) {
+        self.init(width: widthBuilder, height: heightBuilder, alignment: { _ in alignment })
     }
 
 
-    public convenience init(itemWidth: ItemWidth, itemHeight: CGFloat) {
-        self.init(itemWidth: { _ in itemWidth }, itemHeight: itemHeight)
+    public convenience init(width: CGFloat, height: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: width, height: { _ in height }, alignment: alignmentBuilder)
     }
 
 
-    public convenience init(itemWidth: CGFloat, itemHeight: CGFloat, alignment: ContentAlignment) {
-        self.init(itemWidth: .fixedWidth(itemWidth, alignment: alignment), itemHeight: itemHeight)
+    public convenience init(width: CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) {
+        self.init(width: width, height: heightBuilder, alignment: { _ in alignment })
     }
 
 
-    public convenience init(numberOfColumns: Int, itemHeight: CGFloat) {
-        self.init(itemWidth: .numberOfColumns(numberOfColumns), itemHeight: itemHeight)
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height: CGFloat, alignment: ContentAlignment) {
+        self.init(width: widthBuilder, height: height, alignment: { _ in alignment })
+    }
+
+
+    public convenience init(width: CGFloat, height: CGFloat, alignment: ContentAlignment) {
+        self.init(width: width, height: height, alignment: { _ in alignment })
+    }
+
+
+    public init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .widthAndAspectRatioWithAlignment(widthBuilder: widthBuilder, aspectRatioBuilder: aspectRatioBuilder, alignmentBuilder: alignmentBuilder))
+        super.init()
+    }
+
+
+    public convenience init(width: CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: { _ in width }, aspectRatio: aspectRatioBuilder, alignment: alignmentBuilder)
+    }
+
+
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: widthBuilder, aspectRatio: { _ in aspectRatio }, alignment: alignmentBuilder)
+    }
+
+
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) {
+        self.init(width: widthBuilder, aspectRatio: aspectRatioBuilder, alignment: { _ in alignment })
+    }
+
+
+    public convenience init(width: CGFloat, aspectRatio: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) {
+        self.init(width: width, aspectRatio: { _ in aspectRatio }, alignment: alignmentBuilder)
+    }
+
+
+    public convenience init(width: CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) {
+        self.init(width: width, aspectRatio: aspectRatioBuilder, alignment: { _ in alignment })
+    }
+
+
+    public convenience init(width widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat, alignment: ContentAlignment) {
+        self.init(width: widthBuilder, aspectRatio: aspectRatio, alignment: { _ in alignment })
+    }
+
+
+    public convenience init(width: CGFloat, aspectRatio: CGFloat, alignment: ContentAlignment) {
+        self.init(width: width, aspectRatio: aspectRatio, alignment: { _ in alignment })
+    }
+
+
+    public init(height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .heightAndColumnCount(heightBuilder: heightBuilder, columnCountBuilder: columnCountBuilder))
+        super.init()
+    }
+
+
+    public convenience init(height: CGFloat, numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int) {
+        self.init(height: { _ in height }, numberOfColumns: columnCountBuilder)
+    }
+
+
+    public convenience init(height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, numberOfColumns: Int) {
+        self.init(height: heightBuilder, numberOfColumns: { _ in numberOfColumns })
+    }
+
+
+    public convenience init(height: CGFloat, numberOfColumns: Int) {
+        self.init(height: height, numberOfColumns: { _ in numberOfColumns })
+    }
+
+
+    public init(numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .columnCountAndAspectRatio(columnCountBuilder: columnCountBuilder, aspectRatioBuilder: aspectRatioBuilder))
+        super.init()
+    }
+
+
+    public convenience init(numberOfColumns: Int, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
+        self.init(numberOfColumns: { _ in numberOfColumns }, aspectRatio: aspectRatioBuilder)
+    }
+
+
+    public convenience init(numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int, aspectRatio: CGFloat) {
+        self.init(numberOfColumns: columnCountBuilder, aspectRatio: { _ in aspectRatio })
+    }
+
+
+    public convenience init(numberOfColumns: Int, aspectRatio: CGFloat) {
+        self.init(numberOfColumns: numberOfColumns, aspectRatio: { _ in aspectRatio })
     }
 
 }
 
 
-public typealias WaterfallLayoutParameter = (collectionView: UICollectionView, layout: WaterfallLayout)
 public typealias WaterfallLayoutSectionBasedParameter = (collectionView: UICollectionView, layout: WaterfallLayout, section: Int)
 public typealias WaterfallLayoutIndexPathBasedParameter = (collectionView: UICollectionView, layout: WaterfallLayout, indexPath: IndexPath)
 
 
 extension WaterfallLayout {
-
-    public enum ItemWidth {
-
-        case fixedWidth(CGFloat, alignment: ContentAlignment)
-        case numberOfColumns(Int)
-
-
-        fileprivate func width(for contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat) -> CGFloat {
-            switch self {
-            case let .fixedWidth(width, _):
-                return width
-
-            case let .numberOfColumns(columnCount):
-                return (contentWidth - sectionInsets.left - sectionInsets.right - CGFloat(columnCount - 1) * itemHorizontalSpacing) / CGFloat(columnCount)
-            }
-        }
-
-
-        fileprivate func columnCount(for contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat) -> Int {
-            switch self {
-            case let .fixedWidth(width, _):
-                return Int((contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing) / (width + itemHorizontalSpacing))
-
-            case let .numberOfColumns(columnCount):
-                return columnCount
-            }
-        }
-
-
-        fileprivate func additionalLeftInset(for contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat) -> CGFloat {
-            switch self {
-            case let .fixedWidth(width, alignment):
-                switch alignment {
-                case .left:
-                    return 0
-
-                case .right:
-                    let columnCount = self.columnCount(for: contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemHorizontalSpacing)
-                    return contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing - CGFloat(columnCount) * (width + itemHorizontalSpacing)
-
-                case .center:
-                    return ItemWidth.fixedWidth(width, alignment: .right).additionalLeftInset(for: contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemHorizontalSpacing) / 2
-                }
-
-            case .numberOfColumns:
-                return 0
-            }
-        }
-
-    }
-
 
     public enum ContentAlignment {
 
@@ -152,40 +183,150 @@ extension WaterfallLayout {
 extension WaterfallLayout {
 
     @discardableResult
-    open func setItemWidth(_ builder: @escaping (WaterfallLayoutSectionBasedParameter) -> ItemWidth) -> WaterfallLayout {
-        self.builderBundle.itemWidthBuilder = builder
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        self.builderBundle.itemSizeDescription = .sizeWithAlignment(widthBuilder: widthBuilder, heightBuilder: heightBuilder, alignmentBuilder: alignmentBuilder)
         return self
     }
 
 
     @discardableResult
-    open func setItemWidth(_ itemWidth: ItemWidth) -> WaterfallLayout {
-        return self.setItemWidth { _ in itemWidth }
+    open func setItemSize(withWidth width: CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: { _ in width }, height: heightBuilder, alignment: alignmentBuilder)
     }
 
 
     @discardableResult
-    open func setItemWidth(_ width: CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
-        return self.setItemWidth(.fixedWidth(width, alignment: alignment))
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, height: { _ in height }, alignment: alignmentBuilder)
     }
 
 
     @discardableResult
-    open func setItemWidth(byNumberOfColumns numberOfColumns: Int) -> WaterfallLayout {
-        return self.setItemWidth(.numberOfColumns(numberOfColumns))
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, height: heightBuilder, alignment: { _ in alignment })
     }
 
 
     @discardableResult
-    open func setItemHeight(_ builder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) -> WaterfallLayout {
-        self.builderBundle.itemHeightBuilder = builder
+    open func setItemSize(withWidth width: CGFloat, height: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, height: { _ in height }, alignment: alignmentBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, height heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, height: heightBuilder, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, height: CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, height: height, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, height: CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, height: height, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        self.builderBundle.itemSizeDescription = .widthAndAspectRatioWithAlignment(widthBuilder: widthBuilder, aspectRatioBuilder: aspectRatioBuilder, alignmentBuilder: alignmentBuilder)
         return self
     }
 
 
     @discardableResult
-    open func setItemHeight(_ height: CGFloat) -> WaterfallLayout {
-        return self.setItemHeight { _ in height }
+    open func setItemSize(withWidth width: CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: { _ in width }, aspectRatio: aspectRatioBuilder, alignment: alignmentBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, aspectRatio: { _ in aspectRatio }, alignment: alignmentBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, aspectRatio: aspectRatioBuilder, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, aspectRatio: CGFloat, alignment alignmentBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, aspectRatio: { _ in aspectRatio }, alignment: alignmentBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, aspectRatio: aspectRatioBuilder, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: widthBuilder, aspectRatio: aspectRatio, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, aspectRatio: CGFloat, alignment: ContentAlignment) -> WaterfallLayout {
+        return self.setItemSize(withWidth: width, aspectRatio: aspectRatio, alignment: { _ in alignment })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int) -> WaterfallLayout {
+        self.builderBundle.itemSizeDescription = .heightAndColumnCount(heightBuilder: heightBuilder, columnCountBuilder: columnCountBuilder)
+        return self
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight height: CGFloat, numberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int) -> WaterfallLayout {
+        return self.setItemSize(withHeight: { _ in height }, numberOfColumns: columnCountBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight heightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, numberOfColumns: Int) -> WaterfallLayout {
+        return self.setItemSize(withHeight: heightBuilder, numberOfColumns: { _ in numberOfColumns })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight height: CGFloat, numberOfColumns: Int) -> WaterfallLayout {
+        return self.setItemSize(withHeight: height, numberOfColumns: { _ in numberOfColumns })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withNumberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) -> WaterfallLayout {
+        self.builderBundle.itemSizeDescription = .columnCountAndAspectRatio(columnCountBuilder: columnCountBuilder, aspectRatioBuilder: aspectRatioBuilder)
+        return self
+    }
+
+
+    @discardableResult
+    open func setItemSize(withNumberOfColumns columnCount: Int, aspectRatio aspectRatioBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) -> WaterfallLayout {
+        return self.setItemSize(withNumberOfColumns: { _ in columnCount }, aspectRatio: aspectRatioBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withNumberOfColumns columnCountBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> Int, aspectRatio: CGFloat) -> WaterfallLayout {
+        return self.setItemSize(withNumberOfColumns: columnCountBuilder, aspectRatio: { _ in aspectRatio })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withNumberOfColumns columnCount: Int, aspectRatio: CGFloat) -> WaterfallLayout {
+        return self.setItemSize(withNumberOfColumns: columnCount, aspectRatio: { _ in aspectRatio })
     }
 
 
@@ -395,14 +536,13 @@ extension WaterfallLayout {
 
 
     private func prepareCells(of collectionView: UICollectionView, with sectionInsets: UIEdgeInsets, forSectionAt section: Int) {
-        let itemWidth = self.builderBundle.itemWidthBuilder((collectionView, layout: self, section))
         let itemSpacing = self.builderBundle.itemSpacingBuilder((collectionView, layout: self, section))
 
-        let width = itemWidth.width(for: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width)
-        let columnCount = itemWidth.columnCount(for: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width)
-        let additionalLeftInset = itemWidth.additionalLeftInset(for: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width)
-        let cellMinY = self.contentHeight
+        let itemWidth = self.builderBundle.itemWidth(of: collectionView, layout: self, with: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width, forSectionAt: section)
+        let additionalLeftInset = self.builderBundle.additionalLeftInset(of: collectionView, layout: self, with: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width, forSectionAt: section)
+        let columnCount = self.builderBundle.columnCount(of: collectionView, layout: self, with: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width, forSectionAt: section)
 
+        let cellMinY = self.contentHeight
         var attributesInSection: [UICollectionViewLayoutAttributes] = []
         var lastFramesOfColumn: [CGRect] = []
 
@@ -413,9 +553,9 @@ extension WaterfallLayout {
             for index in 0 ..< columnCount {
                 guard lastFramesOfColumn.count > index else {
                     let frame = CGRect(
-                            x: sectionInsets.left + additionalLeftInset + CGFloat(index) * (width + itemSpacing.width),
+                            x: sectionInsets.left + additionalLeftInset + CGFloat(index) * (itemWidth + itemSpacing.width),
                             y: cellMinY - itemSpacing.height,
-                            width: width,
+                            width: itemWidth,
                             height: 0
                     )
                     targetColumnIndex = index
@@ -439,7 +579,7 @@ extension WaterfallLayout {
 
             var frame = lastFramesOfColumn[targetColumnIndex]
             frame.origin.y = leastMaxY + itemSpacing.height
-            frame.size.height = self.builderBundle.itemHeightBuilder((collectionView, layout: self, indexPath))
+            frame.size.height = self.builderBundle.itemHeight(of: collectionView, layout: self, with: self.contentWidth, sectionInsets: sectionInsets, itemHorizontalSpacing: itemSpacing.width, forItemAt: indexPath)
             lastFramesOfColumn[targetColumnIndex] = frame
 
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -531,12 +671,21 @@ extension WaterfallLayout {
 
 extension WaterfallLayout {
 
+    fileprivate enum ItemSizeDescription {
+
+        case sizeWithAlignment(widthBuilder: (WaterfallLayoutSectionBasedParameter) -> CGFloat, heightBuilder: (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignmentBuilder: (WaterfallLayoutSectionBasedParameter) -> ContentAlignment)
+        case widthAndAspectRatioWithAlignment(widthBuilder: (WaterfallLayoutSectionBasedParameter) -> CGFloat, aspectRatioBuilder: (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, alignmentBuilder: (WaterfallLayoutSectionBasedParameter) -> ContentAlignment)
+        case heightAndColumnCount(heightBuilder: (WaterfallLayoutIndexPathBasedParameter) -> CGFloat, columnCountBuilder: (WaterfallLayoutSectionBasedParameter) -> Int)
+        case columnCountAndAspectRatio(columnCountBuilder: (WaterfallLayoutSectionBasedParameter) -> Int, aspectRatioBuilder: (WaterfallLayoutIndexPathBasedParameter) -> CGFloat)
+
+    }
+
+
     fileprivate class BuilderBundle {
 
-        var itemWidthBuilder: (WaterfallLayoutSectionBasedParameter) -> ItemWidth
-        var itemHeightBuilder: (WaterfallLayoutIndexPathBasedParameter) -> CGFloat
-        var itemSpacingBuilder: (WaterfallLayoutSectionBasedParameter) -> CGSize = { _ in .zero }
+        var itemSizeDescription: ItemSizeDescription
 
+        var itemSpacingBuilder: (WaterfallLayoutSectionBasedParameter) -> CGSize = { _ in .zero }
         var sectionInsetsBuilder: (WaterfallLayoutSectionBasedParameter) -> UIEdgeInsets = { _ in .zero }
 
         var numberOfSectionHeadersBuilder: (WaterfallLayoutSectionBasedParameter) -> Int = { _ in 0 }
@@ -548,9 +697,172 @@ extension WaterfallLayout {
         var sectionFooterInsetsBuilder: (WaterfallLayoutIndexPathBasedParameter) -> UIEdgeInsets = { _ in .zero }
 
 
-        init(itemWidthBuilder: @escaping (WaterfallLayoutSectionBasedParameter) -> ItemWidth, itemHeightBuilder: @escaping (WaterfallLayoutIndexPathBasedParameter) -> CGFloat) {
-            self.itemWidthBuilder = itemWidthBuilder
-            self.itemHeightBuilder = itemHeightBuilder
+        init(itemSizeDescription: ItemSizeDescription) {
+            self.itemSizeDescription = itemSizeDescription
+        }
+
+
+        func itemWidth(of collectionView: UICollectionView, layout: WaterfallLayout, with contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat, forSectionAt section: Int) -> CGFloat {
+            switch self.itemSizeDescription {
+            case let .sizeWithAlignment(widthBuilder, _, _):
+                return max(widthBuilder((collectionView, layout, section)), 0)
+
+            case let .widthAndAspectRatioWithAlignment(widthBuilder, _, _):
+                return max(widthBuilder((collectionView, layout, section)), 0)
+
+            case let .heightAndColumnCount(_, columnCountBuilder):
+                let columnCount = columnCountBuilder((collectionView, layout, section))
+                let widthSumOfItems = contentWidth - sectionInsets.left - sectionInsets.right - CGFloat(columnCount - 1) * itemHorizontalSpacing
+
+                guard columnCount > 0,
+                      widthSumOfItems > 0 else {
+                    return 0
+                }
+
+                return widthSumOfItems / CGFloat(columnCount)
+
+            case let .columnCountAndAspectRatio(columnCountBuilder, _):
+                let columnCount = columnCountBuilder((collectionView, layout, section))
+                let widthSumOfItems = contentWidth - sectionInsets.left - sectionInsets.right - CGFloat(columnCount - 1) * itemHorizontalSpacing
+
+                guard columnCount > 0,
+                      widthSumOfItems > 0 else {
+                    return 0
+                }
+
+                return widthSumOfItems / CGFloat(columnCount)
+            }
+        }
+
+
+        func itemHeight(of collectionView: UICollectionView, layout: WaterfallLayout, with contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat, forItemAt indexPath: IndexPath) -> CGFloat {
+            switch self.itemSizeDescription {
+            case let .sizeWithAlignment(_, heightBuilder, _):
+                return max(heightBuilder((collectionView, layout, indexPath)), 0)
+
+            case let .widthAndAspectRatioWithAlignment(widthBuilder, aspectRatioBuilder, _):
+                let width = widthBuilder((collectionView, layout, indexPath.section))
+                let aspectRatio = aspectRatioBuilder((collectionView, layout, indexPath))
+
+                guard width > 0,
+                      aspectRatio > 0 else {
+                    return 0
+                }
+
+                return width / aspectRatio
+
+            case let .heightAndColumnCount(heightBuilder, _):
+                return max(heightBuilder((collectionView, layout, indexPath)), 0)
+
+            case let .columnCountAndAspectRatio(columnCountBuilder, aspectRatioBuilder):
+                let columnCount = columnCountBuilder((collectionView, layout, indexPath.section))
+                let widthSumOfItems = contentWidth - sectionInsets.left - sectionInsets.right - CGFloat(columnCount - 1) * itemHorizontalSpacing
+                let aspectRatio = aspectRatioBuilder((collectionView, layout, indexPath))
+
+                guard columnCount > 0,
+                      widthSumOfItems > 0,
+                      aspectRatio > 0 else {
+                    return 0
+                }
+
+                return widthSumOfItems / (CGFloat(columnCount) * aspectRatio)
+            }
+        }
+
+
+        func additionalLeftInset(of collectionView: UICollectionView, layout: WaterfallLayout, with contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat, forSectionAt section: Int) -> CGFloat {
+            switch self.itemSizeDescription {
+            case let .sizeWithAlignment(widthBuilder, _, alignmentBuilder):
+                let width = widthBuilder((collectionView, layout, section))
+                let extendedContentWidth = contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing
+                let extendedItemWidth = width + itemHorizontalSpacing
+
+                guard width > 0,
+                      extendedContentWidth > 0,
+                      extendedItemWidth > 0 else {
+                    return 0
+                }
+
+                let columnCount = Int(extendedContentWidth / extendedItemWidth)
+
+                switch alignmentBuilder((collectionView, layout, section)) {
+                case .left:
+                    return 0
+
+                case .right:
+                    return extendedContentWidth - CGFloat(columnCount) * extendedItemWidth
+
+                case .center:
+                    return (extendedContentWidth - CGFloat(columnCount) * extendedItemWidth) / 2
+                }
+
+            case let .widthAndAspectRatioWithAlignment(widthBuilder, _, alignmentBuilder):
+                let width = widthBuilder((collectionView, layout, section))
+                let extendedContentWidth = contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing
+                let extendedItemWidth = width + itemHorizontalSpacing
+
+                guard width > 0,
+                      extendedContentWidth > 0,
+                      extendedItemWidth > 0 else {
+                    return 0
+                }
+
+                let columnCount = Int(extendedContentWidth / extendedItemWidth)
+
+                switch alignmentBuilder((collectionView, layout, section)) {
+                case .left:
+                    return 0
+
+                case .right:
+                    return extendedContentWidth - CGFloat(columnCount) * extendedItemWidth
+
+                case .center:
+                    return (extendedContentWidth - CGFloat(columnCount) * extendedItemWidth) / 2
+                }
+
+            case .heightAndColumnCount:
+                return 0
+
+            case .columnCountAndAspectRatio:
+                return 0
+            }
+        }
+
+
+        func columnCount(of collectionView: UICollectionView, layout: WaterfallLayout, with contentWidth: CGFloat, sectionInsets: UIEdgeInsets, itemHorizontalSpacing: CGFloat, forSectionAt section: Int) -> Int {
+            switch self.itemSizeDescription {
+            case let .sizeWithAlignment(widthBuilder, _, _):
+                let width = widthBuilder((collectionView, layout, section))
+                let extendedContentWidth = contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing
+                let extendedItemWidth = width + itemHorizontalSpacing
+
+                guard width > 0,
+                      extendedContentWidth > 0,
+                      extendedItemWidth > 0 else {
+                    return 0
+                }
+
+                return Int(extendedContentWidth / extendedItemWidth)
+
+            case let .widthAndAspectRatioWithAlignment(widthBuilder, _, _):
+                let width = widthBuilder((collectionView, layout, section))
+                let extendedContentWidth = contentWidth - sectionInsets.left - sectionInsets.right + itemHorizontalSpacing
+                let extendedItemWidth = width + itemHorizontalSpacing
+
+                guard width > 0,
+                      extendedContentWidth > 0,
+                      extendedItemWidth > 0 else {
+                    return 0
+                }
+
+                return Int(extendedContentWidth / extendedItemWidth)
+
+            case let .heightAndColumnCount(_, columnCountBuilder):
+                return max(columnCountBuilder((collectionView, layout, section)), 0)
+
+            case let .columnCountAndAspectRatio(columnCountBuilder, _):
+                return max(columnCountBuilder((collectionView, layout, section)), 0)
+            }
         }
 
     }
