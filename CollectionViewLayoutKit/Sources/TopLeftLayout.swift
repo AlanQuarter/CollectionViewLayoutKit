@@ -36,6 +36,48 @@ open class TopLeftLayout: DecorationViewSupportableLayout {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+    public init(width widthBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat, height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .widthAndHeight(widthBuilder: widthBuilder, heightBuilder: heightBuilder))
+        super.init()
+    }
+
+
+    public convenience init(width: CGFloat, height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat) {
+        self.init(width: { _ in width }, height: heightBuilder)
+    }
+
+
+    public convenience init(width widthBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat, height: CGFloat) {
+        self.init(width: widthBuilder, height: { _ in height })
+    }
+
+
+    public convenience init(width : CGFloat, height: CGFloat) {
+        self.init(width: width, height: { _ in height })
+    }
+
+
+    public init(height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) {
+        self.builderBundle = BuilderBundle(itemSizeDescription: .heightAndAspectRatio(heightBuilder: heightBuilder, aspectRatioBuilder: aspectRatioBuilder))
+        super.init()
+    }
+
+
+    public convenience init(height: CGFloat, aspectRatio aspectRatioBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) {
+        self.init(height: { _ in height }, aspectRatio: aspectRatioBuilder)
+    }
+
+
+    public convenience init(height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat) {
+        self.init(height: heightBuilder, aspectRatio: { _ in aspectRatio })
+    }
+
+
+    public convenience init(height: CGFloat, aspectRatio: CGFloat) {
+        self.init(height: height, aspectRatio: { _ in aspectRatio })
+    }
+
 }
 
 
@@ -58,11 +100,195 @@ extension TopLeftLayout {
 
 extension TopLeftLayout {
 
-//    @discardableResult
-//    open func setItemSize(withWidth widthBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat, height heightBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat, alignment alignmentBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> ContentAlignment) -> TopLeftLayout {
-//        self.builderBundle.itemSizeDescription = .sizeWithAlignment(widthBuilder: widthBuilder, heightBuilder: heightBuilder, alignmentBuilder: alignmentBuilder)
-//        return self
-//    }
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat, height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat) -> TopLeftLayout {
+        self.builderBundle.itemSizeDescription = .widthAndHeight(widthBuilder: widthBuilder, heightBuilder: heightBuilder)
+        return self
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, height heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withWidth: { _ in width }, height: heightBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth widthBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat, height: CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withWidth: widthBuilder, height: { _ in height })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withWidth width: CGFloat, height: CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withWidth: width, height: { _ in height })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat, aspectRatio aspectRatioBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) -> TopLeftLayout {
+        self.builderBundle.itemSizeDescription = .heightAndAspectRatio(heightBuilder: heightBuilder, aspectRatioBuilder: aspectRatioBuilder)
+        return self
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight height: CGFloat, aspectRatio aspectRatioBuilder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withHeight: { _ in height }, aspectRatio: aspectRatioBuilder)
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight heightBuilder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGFloat, aspectRatio: CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withHeight: heightBuilder, aspectRatio: { _ in aspectRatio })
+    }
+
+
+    @discardableResult
+    open func setItemSize(withHeight height: CGFloat, aspectRatio: CGFloat) -> TopLeftLayout {
+        return self.setItemSize(withHeight: height, aspectRatio: { _ in aspectRatio })
+    }
+
+
+    @discardableResult
+    open func setContentAlignment(_ builder: @escaping (TopLeftLayoutSectionBasedParameter) -> ContentAlignment) -> TopLeftLayout {
+        self.builderBundle.contentAlignmentBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setContentAlignment(_ alignment: ContentAlignment) -> TopLeftLayout {
+        return self.setContentAlignment { _ in alignment }
+    }
+
+
+    @discardableResult
+    open func setItemSpacing(_ builder: @escaping (TopLeftLayoutSectionBasedParameter) -> CGSize) -> TopLeftLayout {
+        self.builderBundle.itemSpacingBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setItemSpacing(_ spacing: CGSize) -> TopLeftLayout {
+        return self.setItemSpacing { _ in spacing }
+    }
+
+
+    @discardableResult
+    open func setItemSpacing(width: CGFloat, height: CGFloat) -> TopLeftLayout {
+        return self.setItemSpacing(CGSize(width: width, height: height))
+    }
+
+
+    @discardableResult
+    open func setSectionInsets(_ builder: @escaping (TopLeftLayoutSectionBasedParameter) -> UIEdgeInsets) -> TopLeftLayout {
+        self.builderBundle.sectionInsetsBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setSectionInsets(_ insets: UIEdgeInsets) -> TopLeftLayout {
+        return self.setSectionInsets { _ in insets }
+    }
+
+
+    @discardableResult
+    open func setSectionInsets(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> TopLeftLayout {
+        return self.setSectionInsets(UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+    }
+
+
+    @discardableResult
+    open func setNumberOfSectionHeader(_ builder: @escaping (TopLeftLayoutSectionBasedParameter) -> Int) -> TopLeftLayout {
+        self.builderBundle.numberOfSectionHeadersBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setNumberOfSectionHeader(_ number: Int) -> TopLeftLayout {
+        return self.setNumberOfSectionHeader { _ in number }
+    }
+
+
+    @discardableResult
+    open func setSectionHeaderHeight(_ builder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) -> TopLeftLayout {
+        self.builderBundle.sectionHeaderHeightBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setSectionHeaderHeight(_ height: CGFloat) -> TopLeftLayout {
+        return self.setSectionHeaderHeight { _ in height }
+    }
+
+
+    @discardableResult
+    open func setSectionHeaderInsets(_ builder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> UIEdgeInsets) -> TopLeftLayout {
+        self.builderBundle.sectionHeaderInsetsBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setSectionHeaderInsets(_ insets: UIEdgeInsets) -> TopLeftLayout {
+        return self.setSectionHeaderInsets { _ in insets }
+    }
+
+
+    @discardableResult
+    open func setSectionHeaderInsets(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> TopLeftLayout {
+        return self.setSectionHeaderInsets(UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+    }
+
+
+    @discardableResult
+    open func setNumberOfSectionFooter(_ builder: @escaping (TopLeftLayoutSectionBasedParameter) -> Int) -> TopLeftLayout {
+        self.builderBundle.numberOfSectionFootersBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setNumberOfSectionFooter(_ number: Int) -> TopLeftLayout {
+        return self.setNumberOfSectionFooter { _ in number }
+    }
+
+
+    @discardableResult
+    open func setSectionFooterHeight(_ builder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> CGFloat) -> TopLeftLayout {
+        self.builderBundle.sectionFooterHeightBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setSectionFooterHeight(_ height: CGFloat) -> TopLeftLayout {
+        return self.setSectionFooterHeight { _ in height }
+    }
+
+
+    @discardableResult
+    open func setSectionFooterInsets(_ builder: @escaping (TopLeftLayoutIndexPathBasedParameter) -> UIEdgeInsets) -> TopLeftLayout {
+        self.builderBundle.sectionFooterInsetsBuilder = builder
+        return self
+    }
+
+
+    @discardableResult
+    open func setSectionFooterInsets(_ insets: UIEdgeInsets) -> TopLeftLayout {
+        return self.setSectionFooterInsets { _ in insets }
+    }
+
+
+    @discardableResult
+    open func setSectionFooterInsets(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> TopLeftLayout {
+        return self.setSectionFooterInsets(UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+    }
 
 }
 
@@ -150,7 +376,7 @@ extension TopLeftLayout {
 
         var cellMinY = self.contentHeight
         var attributesInLine: [UICollectionViewLayoutAttributes] = []
-        var attributesInSection: [[UICollectionViewLayoutAttributes]] = [attributesInLine]
+        var attributesInSection: [[UICollectionViewLayoutAttributes]] = []
         var lineNumber = 0
 
         for item in 0 ..< collectionView.numberOfItems(inSection: section) {
@@ -160,34 +386,15 @@ extension TopLeftLayout {
             var frame = attributesInLine.last?.frame ?? .zero
 
             if frame == .zero {
-                frame.origin.x = collectionView.contentInset.left + sectionInsets.left
-            } else if frame.maxX + itemSpacing.width + itemWidth < collectionView.contentInset.left + self.contentWidth - sectionInsets.right {
+                frame.origin.x = sectionInsets.left
+            } else if frame.maxX + itemSpacing.width + itemWidth < self.contentWidth - sectionInsets.right {
                 frame.origin.x = frame.maxX + itemSpacing.width
             } else {
-                frame.origin.x = collectionView.contentInset.left + sectionInsets.left
-
-                let additionalInset = self.contentWidth - sectionInsets.right - ((attributesInLine.last?.frame.maxX ?? 0) - collectionView.contentInset.left)
-
-                if additionalInset > 0 {
-                    switch contentAlignment {
-                    case .left:
-                        break
-
-                    case .right:
-                        for attributes in attributesInLine {
-                            attributes.frame.origin.x += additionalInset
-                        }
-
-                    case .center:
-                        for attributes in attributesInLine {
-                            attributes.frame.origin.x += additionalInset / 2
-                        }
-                    }
-                }
+                frame.origin.x = sectionInsets.left
 
                 cellMinY += itemHeight + itemSpacing.height
+                attributesInSection.append(self.leftInsetAdjustedAttributes(attributesInLine, with: sectionInsets.right, alignment: contentAlignment))
                 attributesInLine = []
-                attributesInSection.append(attributesInLine)
                 lineNumber += 1
             }
 
@@ -204,7 +411,37 @@ extension TopLeftLayout {
             }
         }
 
+        if attributesInLine.count > 0 {
+            attributesInSection.append(self.leftInsetAdjustedAttributes(attributesInLine, with: sectionInsets.right, alignment: contentAlignment))
+        }
+
         self.cellAttributes.append(attributesInSection.reduce([]) { $0 + $1 })
+    }
+
+
+    private func leftInsetAdjustedAttributes(_ source: [UICollectionViewLayoutAttributes], with sectionRightInset: CGFloat, alignment: ContentAlignment) -> [UICollectionViewLayoutAttributes] {
+        let additionalInset = self.contentWidth - sectionRightInset - (source.last?.frame.maxX ?? 0)
+
+        guard additionalInset > 0 else {
+            return source
+        }
+
+        switch alignment {
+        case .left:
+            break
+
+        case .right:
+            for attributes in source {
+                attributes.frame.origin.x += additionalInset
+            }
+
+        case .center:
+            for attributes in source {
+                attributes.frame.origin.x += additionalInset / 2
+            }
+        }
+
+        return source
     }
 
 

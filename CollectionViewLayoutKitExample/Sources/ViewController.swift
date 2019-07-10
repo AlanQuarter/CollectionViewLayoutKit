@@ -75,10 +75,11 @@ extension ViewController {
 
     enum Menu: String, CaseIterable, CustomStringConvertible {
 
-        case waterfall = "Waterfall Layout"
+        case topLeft = "TopLeftLayout"
+        case waterfall = "WaterfallLayout"
 
 
-        static let allCases: [Menu] = [.waterfall]
+        static let allCases: [Menu] = [.topLeft, .waterfall]
 
 
         var description: String {
@@ -89,6 +90,9 @@ extension ViewController {
             let viewController: UIViewController
 
             switch self {
+            case .topLeft:
+                viewController = TopLeftViewController()
+
             case .waterfall:
                 viewController = WaterfallViewController()
             }

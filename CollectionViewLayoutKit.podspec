@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
   This module contains the following collection view layouts:
-  - WaterfallLayout
   - TopLeftLayout
+  - WaterfallLayout
                        DESC
 
   s.homepage         = 'https://github.com/AlanQuarter/CollectionViewLayoutKit'
