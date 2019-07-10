@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CollectionViewLayoutKit'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'A bundle of various UICollectionViewLayouts.'
 
 # This description is used to generate tags and improve search results.
@@ -19,7 +19,8 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
   This module contains the following collection view layouts:
-  - waterfall layout
+  - TopLeftLayout
+  - WaterfallLayout
                        DESC
 
   s.homepage         = 'https://github.com/AlanQuarter/CollectionViewLayoutKit'

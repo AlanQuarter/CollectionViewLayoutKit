@@ -8,7 +8,7 @@ import UIKit
 import CollectionViewLayoutKit
 
 
-class WaterfallViewController: UIViewController {
+class TopLeftViewController: UIViewController {
 
     private let cellIdentifier = "cell"
     private let sectionHeaderIdentifier = "header"
@@ -18,14 +18,45 @@ class WaterfallViewController: UIViewController {
     private let supplementaryViewLabelTag = 8376
 
 
+    private var data: [[NSAttributedString]] = []
+
+
     private weak var collectionView: UICollectionView!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        for _ in 0 ..< 3 {
+            var strings: [NSAttributedString] = []
+
+            for _ in 0 ..< Int.random(in: 10 ... 30) {
+                strings.append(NSAttributedString(
+                        string: String((0 ..< Int.random(in: 4 ... 10)).map { _ in letters.randomElement()! }),
+                        attributes: [
+                            .font: UIFont.systemFont(ofSize: 20),
+                            .foregroundColor: UIColor.white,
+                            .paragraphStyle: paragraphStyle
+                        ]
+                ))
+            }
+
+            self.data.append(strings)
+        }
+
         self.collectionView = {
-            let layout = WaterfallLayout(height: { _, _, _ in CGFloat(Int.random(in: 100 ... 200)) }, numberOfColumns: 2)
+            let layout = TopLeftLayout(width: { [weak self] _, _, indexPath in
+                guard let strongSelf = self else {
+                    return 50
+                }
+
+                let attributedString: NSAttributedString = strongSelf.data[indexPath.section][indexPath.row]
+                return ceil(attributedString.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 30), context: nil).width) + 10
+            }, height: 30)
                     .setItemSpacing(width: 10, height: 10)
                     .setSectionInsets { _, _, section in section == 0 ? .zero : UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0) }
                     .setNumberOfSectionHeader { _, _, section in section + 1 }
@@ -66,30 +97,24 @@ class WaterfallViewController: UIViewController {
 }
 
 
-extension WaterfallViewController: UICollectionViewDataSource {
+extension TopLeftViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.data[section].count
     }
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath)
-        cell.backgroundColor = UIColor(
-                red: CGFloat(Int.random(in: 0 ... 255)) / 255,
-                green: CGFloat(Int.random(in: 0 ... 255)) / 255,
-                blue: CGFloat(Int.random(in: 0 ... 255)) / 255,
-                alpha: 0.6
-        )
+        cell.backgroundColor = .darkGray
 
         if let label = cell.contentView.viewWithTag(self.cellLabelTag) as? UILabel {
             label.frame = cell.bounds
-            label.text = "\(indexPath.row)"
+            label.attributedText = self.data[indexPath.section][indexPath.row]
         } else {
             let label = UILabel(frame: cell.bounds)
             label.tag = self.cellLabelTag
-            label.textAlignment = .center
-            label.text = "\(indexPath.row)"
+            label.attributedText = self.data[indexPath.section][indexPath.row]
 
             cell.contentView.addSubview(label)
         }
@@ -99,7 +124,7 @@ extension WaterfallViewController: UICollectionViewDataSource {
 
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return self.data.count
     }
 
 

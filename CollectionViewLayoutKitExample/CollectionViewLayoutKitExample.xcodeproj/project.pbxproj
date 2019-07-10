@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DB990CB58DEE5AC80C839E6 /* TopLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99E9C5A839E7487E4E159 /* TopLeftViewController.swift */; };
 		2DB990EB34636A06C2413EB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99159EA925BBA6DDC927D /* ViewController.swift */; };
 		2DB99F821F396739902F0979 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB99A6159967F48DF2E8ED9 /* Header.swift */; };
 		E766ECC422B21ED5005FBCB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E766ECC322B21ED5005FBCB6 /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		2DB99159EA925BBA6DDC927D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2DB99A6159967F48DF2E8ED9 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		2DB99E9C5A839E7487E4E159 /* TopLeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopLeftViewController.swift; sourceTree = "<group>"; };
 		E766ECC022B21ED5005FBCB6 /* CollectionViewLayoutKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewLayoutKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E766ECC322B21ED5005FBCB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E766ECC522B21ED5005FBCB6 /* WaterfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				E766ECCF22B21ED6005FBCB6 /* Info.plist */,
 				2DB99A6159967F48DF2E8ED9 /* Header.swift */,
 				2DB99159EA925BBA6DDC927D /* ViewController.swift */,
+				2DB99E9C5A839E7487E4E159 /* TopLeftViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				E766ECC422B21ED5005FBCB6 /* AppDelegate.swift in Sources */,
 				2DB99F821F396739902F0979 /* Header.swift in Sources */,
 				2DB990EB34636A06C2413EB3 /* ViewController.swift in Sources */,
+				2DB990CB58DEE5AC80C839E6 /* TopLeftViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Sources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,7 +315,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Sources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
