@@ -25,7 +25,6 @@ class WaterfallViewController: UIViewController {
         super.viewDidLoad()
 
         let number: Int8 = 0
-        let result = CGFloat(number)
 
         self.collectionView = {
             let layout = WaterfallLayout(height: { _, _, _ in CGFloat(Int.random(in: 100 ... 200)) }, numberOfColumns: 2)
